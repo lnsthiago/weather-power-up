@@ -158,5 +158,12 @@ window.TrelloPowerUp.initialize(
         height: 281,
       });
     },
+    // 'show-settings': t => {
+    //   return t.popup({
+    //     title: 'Card Size',
+    //     url: 'card-size.html',
+    //     height: 281,
+    //   });
+    // },
   }
 );
