@@ -3,11 +3,11 @@ var trello = window.TrelloPowerUp.iframe();
 window.estimate.addEventListener('submit', function (event) {
     event.preventDefault();
     debugger;
-    return trello.set('card', 'shared', 'cardSize', window.estimateDev.value)
+    return trello.set('card', 'shared', 'cardSize', window.cardSize.value)
         .then(function () {
-            trello.set('card', 'shared', 'cardSpent', window.doneDev.value)
+            trello.set('card', 'shared', 'cardSpent', window.cardSpent.value)
                 .then(function () {
-                    trello.set('card', 'shared', 'cardRemaining', window.remainingDev.value)
+                    trello.set('card', 'shared', 'cardRemaining', window.cardRemaining.value)
                         .then(function () {
                             trello.closePopup();
                         })
