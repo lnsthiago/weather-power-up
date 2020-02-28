@@ -6,7 +6,9 @@ function calculateRemaining(){
     var size = document.getElementById('cardSize').value;
     var spent = document.getElementById('cardSpent').value;
 
-    document.getElementById('cardRemaining').value = size - spent;
+    var remaining = size - spent;
+
+    document.getElementById('cardRemaining').value = remaining < 0 ? 0 : remaining;
 }
 
 window.estimate.addEventListener('submit', function (event) {
