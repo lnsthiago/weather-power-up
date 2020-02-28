@@ -9,6 +9,10 @@ function CalculateRemaining() {
     document.getElementById('cardRemaining').value = size - spent;
 }
 
+window.estimate.addEventListener('onchange', function (event) {
+    alert('Teste event');
+});
+
 window.estimate.addEventListener('submit', function (event) {
     event.preventDefault();
     debugger;

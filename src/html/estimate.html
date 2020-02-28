@@ -18,6 +18,16 @@
       margin-top: -10px;
     }
   </style>
+  <script>
+    function CalculateRemaining() {
+      alert('Teste')
+      debugger;
+      var size = document.getElementById('cardSize').value;
+      var spent = document.getElementById('cardSpent').value;
+
+      document.getElementById('cardRemaining').value = size - spent;
+    }
+  </script>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
 </head>
 
@@ -26,11 +36,11 @@
     <div style="display: flex;">
       <div class="margin-default">
         <label>Size:</label>
-        <input name="cardSize" id="cardSize" onchange="alert('Tesssss')" />
+        <input name="cardSize" id="cardSize" onchange="CalculateRemaining()" onkeydown="CalculateRemaining"/>
       </div>
       <div class="margin-default">
         <label>Spent:</label>
-        <input name="cardSpent" id="cardSpent" onchange="this.CalculateRemaining()" />
+        <input name="cardSpent" id="cardSpent" onchange="CalculateRemaining()" onkeyup="CalculateRemaining" />
       </div>
     </div>
     <div style="display: flex;">
