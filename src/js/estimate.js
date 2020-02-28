@@ -3,11 +3,11 @@ var trello = window.TrelloPowerUp.iframe();
 window.estimate.addEventListener('submit', function (event) {
     event.preventDefault();
     debugger;
-    return trello.set('card', 'shared', 'estimateDev', window.estimateDev.value)
+    return trello.set('card', 'shared', 'cardSize', window.estimateDev.value)
         .then(function () {
-            trello.set('card', 'shared', 'doneDev', window.doneDev.value)
+            trello.set('card', 'shared', 'cardSpent', window.doneDev.value)
                 .then(function () {
-                    trello.set('card', 'shared', 'remainingDev', window.remainingDev.value)
+                    trello.set('card', 'shared', 'cardRemaining', window.remainingDev.value)
                         .then(function () {
                             trello.closePopup();
                         })
@@ -16,24 +16,24 @@ window.estimate.addEventListener('submit', function (event) {
 });
 
 trello.render(function () {
-    return trello.get('card', 'shared', 'estimateDev')
-        .then(function (estimateDev) {
-            if(estimateDev === undefined)
-                estimateDev = null;
-            window.estimateDev.value = estimateDev;
+    return trello.get('card', 'shared', 'cardSize')
+        .then(function (cardSize) {
+            if (cardSize === undefined)
+                cardSize = null;
+            window.cardSize.value = cardSize;
         })
         .then(function () {
-            trello.get('card', 'shared', 'doneDev')
-                .then(function (doneDev) {
-                    if(doneDev === undefined)
-                        doneDev = null;
-                    window.doneDev.value = doneDev;
+            trello.get('card', 'shared', 'cardSpent')
+                .then(function (cardSpent) {
+                    if (cardSpent === undefined)
+                        cardSpent = null;
+                    window.cardSpent.value = cardSpent;
                 }).then(function () {
-                    trello.get('card', 'shared', 'remainingDev')
-                        .then(function (remainingDev) {
-                            if(remainingDev == undefined)
-                                remainingDev = null;
-                            window.remainingDev.value = remainingDev
+                    trello.get('card', 'shared', 'cardRemaining')
+                        .then(function (cardRemaining) {
+                            if (cardRemaining == undefined)
+                                cardRemaining = null;
+                            window.cardRemaining.value = cardRemaining
                         })
                         .then(function () {
                             trello.sizeTo('#estimate').done();

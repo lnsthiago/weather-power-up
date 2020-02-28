@@ -1,24 +1,54 @@
 <html>
-  <head>
-    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
-    <style>
-      select { height: 30px; }
-    </style>
-    <script src="https://p.trellocdn.com/power-up.min.js"></script>
-  </head>
-  <body>
-    <form id="estimate">
-      <label>Estimado:</label>
-      <input name="estimateDev" id="estimateDev" />
 
-      <label>Feito:</label>
-      <input name="doneDev" id="doneDev" />
+<head>
+  <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+  <style>
+    .margin-default {
+      margin: 0.5rem;
+      margin-bottom: 0em;
+    }
 
-      <label>Restante:</label>
-      <input name="remainingDev" id="remainingDev" />
+    .margin-remaining {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
 
-      <button type="submit" class="mod-primary">Save</button>
-    </form>
-    <script src="./../js/estimate.js"></script>
-  </body>
+    .save-button {
+      align-self: center;
+      margin-top: -10px;
+    }
+  </style>
+  <script>
+    function CalculateRemaining() {
+      debugger;
+      var size = document.getElementById('cardSize').value;
+      var spent = document.getElementById('cardSpent').value;
+
+      document.getElementById('cardRemaining').value = size - spent;
+    }
+  </script>
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+</head>
+
+<body>
+  <form id="estimate">
+    <div style="display: flex;">
+      <div class="margin-default">
+        <label>Size:</label>
+        <input name="cardSize" id="cardSize" onchange="CalculateRemaining()" />
+      </div>
+      <div class="margin-default">
+        <label>Spent:</label>
+        <input name="cardSpent" id="cardSpent" onchange="CalculateRemaining()" />
+      </div>
+    </div>
+    <div style="display: flex;">
+      <label>Remaining:</label>
+      <input name="cardRemaining" id="cardRemaining" class="margin-remaining" />
+      <button type="submit" class="mod-primary save-button">Save</button>
+    </div>
+  </form>
+  <script src="./../js/estimate.js"></script>
+</body>
+
 </html>

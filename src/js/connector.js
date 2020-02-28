@@ -153,8 +153,8 @@ window.TrelloPowerUp.initialize(
     'card-detail-badges': getEstimateBadgesDetails,
     'show-settings': t => {
       return t.popup({
-        title: t.localizeKey('weather-settings'),
-        url: 'settings.html',
+        title: 'Card Size',
+        url: 'card-size.html',
         height: 281,
       });
     },

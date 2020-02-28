@@ -1,10 +1,10 @@
 {
-  "name": "weather-power-up",
+  "name": "estimate-powerup-bravi",
   "version": "1.0.0",
-  "description": "A small weather Power-Up for Trello",
+  "description": "A Bravi Power-Up for Trello",
   "main": "index.js",
-  "repository": "git@github.com:trello/weather-power-up.git",
-  "author": "Matt Cowan <mcowan@atlassian.com>",
+  "repository": "git@github.com:trello/estimate-powerup-bravi.git",
+  "author": "Thiago Souza <lnsthiago@gmail.com>",
   "license": "MIT",
   "engines": {
     "node": "12"
