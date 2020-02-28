@@ -1,5 +1,14 @@
 var trello = window.TrelloPowerUp.iframe();
 
+function CalculateRemaining() {
+    alert('Teste');
+    debugger;
+    var size = document.getElementById('cardSize').value;
+    var spent = document.getElementById('cardSpent').value;
+
+    document.getElementById('cardRemaining').value = size - spent;
+}
+
 window.estimate.addEventListener('submit', function (event) {
     event.preventDefault();
     debugger;
