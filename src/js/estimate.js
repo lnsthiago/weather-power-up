@@ -1,6 +1,6 @@
 var trello = window.TrelloPowerUp.iframe();
 
-document.getElementById("cardSize")[0].addEventListener('change', calculateRemaining);
+document.getElementById("cardSize").addEventListener('change', calculateRemaining);
 
 function calculateRemaining(){
     var size = document.getElementById('cardSize').value;
