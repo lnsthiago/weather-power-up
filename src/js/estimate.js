@@ -1,10 +1,12 @@
 var trello = window.TrelloPowerUp.iframe();
 
-document.getElementsByName("cardSize")[0].addEventListener('change', doThing);
+document.getElementById("cardSize")[0].addEventListener('change', calculateRemaining);
 
-/* function */
-function doThing(){
-   alert('Horray! Someone wrote "' + this.value + '"!');
+function calculateRemaining(){
+    var size = document.getElementById('cardSize').value;
+    var spent = document.getElementById('cardSpent').value;
+
+    document.getElementById('cardRemaining').value = size - spent;
 }
 
 window.estimate.addEventListener('submit', function (event) {
