@@ -158,7 +158,7 @@ window.TrelloPowerUp.initialize(
         callback: function (t) {
           return t.popup({
             title: "Card Size",
-            url: 'card-size.html'
+            url: 'estimate.html'
           });
         }
       }];
