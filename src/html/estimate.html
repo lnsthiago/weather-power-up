@@ -2,14 +2,15 @@
   <head>
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script src="/script.js" defer></script>
   </head>
   <body>
     <form id="estimate">
       <label>Size:</label>
-      <input name="cardSize" id="cardSize" onchange="console.log('Teste')"/>
+      <input name="cardSize" id="cardSize" onchange="TesteAqui()" onclick="TesteAqui" onkeyup="TesteAqui()" onkeypress="TesteAqui"/>
 
       <label>Spent:</label>
-      <input name="cardSpent" id="cardSpent" />
+      <input name="cardSpent" id="cardSpent" onChange="TesteAqui()" onClick="TesteAqui" onKeyUp="TesteAqui()" onKeyPress="TesteAqui"/>
 
       <label>Remaining</label>
       <input name="cardRemaining" id="cardRemaining" />
