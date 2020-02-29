@@ -8,15 +8,19 @@
 
 <body>
   <form id="priority">
-    <label for="prioritySize">Priority:</label>
-    <select name="size" id="prioritySize">
-      <option value="1">Highest</option>
-      <option value="2">Critical</option>
-      <option value="3">Alarming</option>
-      <option value="4">Act Soon</option>
-      <option value="5">Lowest</option>
-    </select>
-    <button type="submit" class="mod-primary">Save</button>
+    <div style="display: flex;">
+      <div><label for="prioritySize">Priority:</label></div>
+      <div style="align-self: flex-end; margin-left: 0.5em; margin-right: 0.5em;">
+        <select name="size" id="prioritySize">
+          <option value="1">Highest</option>
+          <option value="2">Critical</option>
+          <option value="3">Alarming</option>
+          <option value="4">Act Soon</option>
+          <option value="5">Lowest</option>
+        </select>
+      </div>
+      <div><button type="submit" class="mod-primary">Save</button></div>
+    </div>
   </form>
   <script src="./../js/priority.js"></script>
 </body>
