@@ -1,9 +1,10 @@
 var trello = window.TrelloPowerUp.iframe();
 
-document.getElementById("cardSize").addEventListener('change', calculateRemaining);
+document.getElementById("cardEstimate").addEventListener('change', calculateRemaining);
+document.getElementById("cardSpent").addEventListener('change', calculateRemaining);
 
-function calculateRemaining(){
-    var size = document.getElementById('cardSize').value;
+function calculateRemaining() {
+    var size = document.getElementById('cardEstimate').value;
     var spent = document.getElementById('cardSpent').value;
 
     var remaining = size - spent;
@@ -14,7 +15,7 @@ function calculateRemaining(){
 window.estimate.addEventListener('submit', function (event) {
     event.preventDefault();
     debugger;
-    return trello.set('card', 'shared', 'cardSize', window.cardSize.value)
+    return trello.set('card', 'shared', 'cardEstimate', window.cardEstimate.value)
         .then(function () {
             trello.set('card', 'shared', 'cardSpent', window.cardSpent.value)
                 .then(function () {
@@ -27,11 +28,11 @@ window.estimate.addEventListener('submit', function (event) {
 });
 
 trello.render(function () {
-    return trello.get('card', 'shared', 'cardSize')
-        .then(function (cardSize) {
-            if (cardSize === undefined)
-            cardSize = null;
-            window.cardSize.value = cardSize;
+    return trello.get('card', 'shared', 'cardEstimate')
+        .then(function (cardEstimate) {
+            if (cardEstimate === undefined)
+                cardEstimate = null;
+            window.cardEstimate.value = cardEstimate;
         })
         .then(function () {
             trello.get('card', 'shared', 'cardSpent')
