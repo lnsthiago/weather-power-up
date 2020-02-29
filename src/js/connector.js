@@ -168,7 +168,7 @@ window.TrelloPowerUp.initialize(
         callback: function (t) {
           return t.popup({
             title: "Card Priority",
-            url: 'priority.html'
+            url: 'teste.html'
           });
         }
       }];
