@@ -3,70 +3,65 @@ const REFRESH_INTERVAL = 1800;
 
 const getEstimateBadgesDetails = (t, opts) =>
   Promise.all([
-    t.get('card', 'shared', 'remainingDev'),
-    t.get('card', 'shared', 'remainingQa'),
-    t.get('card', 'shared', 'remainingGp'),
-    t.get('card', 'shared', 'remainingUx')
-  ]).then(([remainingDev, remainingQa, remainingGp, remainingUx]) => {
-    const badgeEstimateDev = {
+    t.get('card', 'shared', 'cardEstimate'),
+    t.get('card', 'shared', 'cardSpent'),
+    t.get('card', 'shared', 'cardRemaining'),
+    t.get('card', 'shared', 'prioritySize')
+  ]).then(([cardEstimate, cardSpent, cardRemaining, prioritySize]) => {
+    const badgeCardEstimate = {
       dynamic(t) {
         return {
-          title: 'Estimativa DEV',
-          text: remainingDev || 'Não estimado',
-          color: isEmpty(remainingDev) ? 'red' : remainingDev === "0" ? 'green' : 'blue',
+          title: 'SIZE',
+          text: cardEstimate || '0',
+          color: 'orange',
           callback: function (t) {
             return t.popup({
-              title: "Estimativa Dev",
-              url: 'estimateDev.html',
+              text: cardEstimate
             });
           }
         };
       },
     };
 
-    const badgeEstimateQa = {
+    const badgeCardSpent = {
       dynamic(t) {
         return {
-          title: 'Estimativa QA',
-          text: remainingQa || 'Não estimado',
-          align: 'center',
-          color: isEmpty(remainingQa) ? 'red' : remainingQa === "0" ? 'green' : 'blue',
+          title: 'SPENT',
+          text: cardSpent || '0',
+          color: 'green',
           callback: function (t) {
             return t.popup({
-              title: "Estimativa QA",
-              url: 'estimateQa.html',
+              text: cardSpent
             });
           }
         };
       },
     };
 
-    const badgeEstimateGp = {
+    const badgeCardRemaining = {
       dynamic(t) {
         return {
-          title: 'Estimativa GP',
-          text: remainingGp || 'Não estimado',
-          color: isEmpty(remainingGp) ? 'red' : remainingGp === "0" ? 'green' : 'blue',
+          title: 'REMAINING',
+          text: cardRemaining || '0',
+          color: 'blue',
           callback: function (t) {
             return t.popup({
-              title: "Estimativa GP",
-              url: 'estimateGp.html',
+              text: cardRemaining
             });
           }
         };
       },
     };
 
-    const badgeEstimateUx = {
+    const badgePrioritySize = {
       dynamic(t) {
         return {
-          title: 'Estimativa UX-UI',
-          text: remainingUx || 'Não estimado',
-          color: isEmpty(remainingUx) ? 'red' : remainingUx === "0" ? 'green' : 'blue',
+          title: 'PRIORITY',
+          text: prioritySize || 'No priority',
+          color: 'orange',
           callback: function (t) {
             return t.popup({
-              title: "Estimativa UX-UI",
-              url: 'estimateUx.html',
+              text: prioritySize
             });
           }
         };
@@ -75,73 +70,73 @@ const getEstimateBadgesDetails = (t, opts) =>
 
     let badges = [];
 
-    badges.push(badgeEstimateDev);
-    badges.push(badgeEstimateQa);
-    badges.push(badgeEstimateGp);
-    badges.push(badgeEstimateUx);
+    badges.push(badgeCardEstimate);
+    badges.push(badgeCardSpent);
+    badges.push(badgeCardRemaining);
+    badges.push(badgePrioritySize);
 
     return badges;
   });
 
-const getEstimateBadges = (t, opts) =>
-  Promise.all([
-    t.get('card', 'shared', 'remainingDev'),
-    t.get('card', 'shared', 'remainingQa'),
-    t.get('card', 'shared', 'remainingGp'),
-    t.get('card', 'shared', 'remainingUx')
-  ]).then(([remainingDev, remainingQa, remainingGp, remainingUx]) => {
-    var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717';
-    var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
+// const getEstimateBadges = (t, opts) =>
+//   Promise.all([
+//     t.get('card', 'shared', 'remainingDev'),
+//     t.get('card', 'shared', 'remainingQa'),
+//     t.get('card', 'shared', 'remainingGp'),
+//     t.get('card', 'shared', 'remainingUx')
+//   ]).then(([remainingDev, remainingQa, remainingGp, remainingUx]) => {
+//     var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717';
+//     var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
 
-    const badgeEstimateDev = {
-      dynamic(t) {
-        return {
-          icon: isEmpty(remainingDev) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-          text: remainingDev || 'Não estimado',
-          color: isEmpty(remainingDev) ? 'red' : remainingDev === "0" ? 'green' : 'blue',
-        };
-      },
-    };
+//     const badgeEstimateDev = {
+//       dynamic(t) {
+//         return {
+//           icon: isEmpty(remainingDev) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
+//           text: remainingDev || 'Não estimado',
+//           color: isEmpty(remainingDev) ? 'red' : remainingDev === "0" ? 'green' : 'blue',
+//         };
+//       },
+//     };
 
-    const badgeEstimateQa = {
-      dynamic(t) {
-        return {
-          icon: isEmpty(remainingQa) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-          text: remainingQa || 'Não estimado',
-          color: isEmpty(remainingQa) ? 'red' : remainingQa === "0" ? 'green' : 'blue',
-        };
-      },
-    };
+//     const badgeEstimateQa = {
+//       dynamic(t) {
+//         return {
+//           icon: isEmpty(remainingQa) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
+//           text: remainingQa || 'Não estimado',
+//           color: isEmpty(remainingQa) ? 'red' : remainingQa === "0" ? 'green' : 'blue',
+//         };
+//       },
+//     };
 
-    const badgeEstimateGp = {
-      dynamic(t) {
-        return {
-          // title: 'GP',
-          icon: isEmpty(remainingGp) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-          text: remainingGp || 'Não estimado',
-          color: isEmpty(remainingGp) ? 'red' : remainingGp === "0" ? 'green' : 'blue',
-        };
-      },
-    };
+//     const badgeEstimateGp = {
+//       dynamic(t) {
+//         return {
+//           // title: 'GP',
+//           icon: isEmpty(remainingGp) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
+//           text: remainingGp || 'Não estimado',
+//           color: isEmpty(remainingGp) ? 'red' : remainingGp === "0" ? 'green' : 'blue',
+//         };
+//       },
+//     };
 
-    const badgeEstimateUx = {
-      dynamic(t) {
-        return {
-          icon: isEmpty(remainingUx) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-          text: remainingUx || 'Não estimado',
-          color: isEmpty(remainingUx) ? 'red' : remainingUx === "0" ? 'green' : 'blue',
-        };
-      },
-    };
+//     const badgeEstimateUx = {
+//       dynamic(t) {
+//         return {
+//           icon: isEmpty(remainingUx) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
+//           text: remainingUx || 'Não estimado',
+//           color: isEmpty(remainingUx) ? 'red' : remainingUx === "0" ? 'green' : 'blue',
+//         };
+//       },
+//     };
 
-    let badges = [];
+//     let badges = [];
 
-    badges.push(badgeEstimateDev);
-    badges.push(badgeEstimateQa);
-    badges.push(badgeEstimateGp);
-    badges.push(badgeEstimateUx);
-    return badges;
-  });
+//     badges.push(badgeEstimateDev);
+//     badges.push(badgeEstimateQa);
+//     badges.push(badgeEstimateGp);
+//     badges.push(badgeEstimateUx);
+//     return badges;
+//   });
 
 function isEmpty(val) {
   return (val === undefined || val == null || val.length <= 0) ? true : false;
@@ -149,7 +144,7 @@ function isEmpty(val) {
 
 window.TrelloPowerUp.initialize(
   {
-    'card-badges': getEstimateBadges,
+    // 'card-badges': getEstimateBadges,
     'card-detail-badges': getEstimateBadgesDetails,
     'card-buttons': function (t, options) {
       return [{
