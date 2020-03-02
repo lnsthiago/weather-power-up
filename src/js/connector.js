@@ -11,6 +11,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardEstimate = {
       dynamic(t) {
         return {
+          icon: 'https://image.flaticon.com/icons/svg/833/833593.svg',
           title: 'SIZE',
           text: cardEstimate || '0',
           color: 'orange'
