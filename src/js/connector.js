@@ -22,6 +22,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardSpent = {
       dynamic(t) {
         return {
+          icon: './../images/tarefa.png',
           title: 'SPENT',
           text: cardSpent || '0',
           color: 'green'
