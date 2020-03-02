@@ -158,7 +158,7 @@ function isEmpty(val) {
 
 window.TrelloPowerUp.initialize(
   {
-    // 'card-badges': getEstimateBadges,
+    'card-badges': getEstimateBadgesDetails,
     'card-detail-badges': getEstimateBadgesDetails,
     'card-buttons': function (t, options) {
       return [{
