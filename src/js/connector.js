@@ -13,12 +13,7 @@ const getEstimateBadgesDetails = (t, opts) =>
         return {
           title: 'SIZE',
           text: cardEstimate || '0',
-          color: 'orange',
-          callback: function (t) {
-            return t.popup({
-              text: cardEstimate
-            });
-          }
+          color: 'orange'
         };
       },
     };
@@ -28,12 +23,7 @@ const getEstimateBadgesDetails = (t, opts) =>
         return {
           title: 'SPENT',
           text: cardSpent || '0',
-          color: 'green',
-          callback: function (t) {
-            return t.popup({
-              text: cardSpent
-            });
-          }
+          color: 'green'
         };
       },
     };
@@ -43,12 +33,7 @@ const getEstimateBadgesDetails = (t, opts) =>
         return {
           title: 'REMAINING',
           text: cardRemaining || '0',
-          color: 'blue',
-          callback: function (t) {
-            return t.popup({
-              text: cardRemaining
-            });
-          }
+          color: 'blue'
         };
       },
     };
@@ -59,11 +44,6 @@ const getEstimateBadgesDetails = (t, opts) =>
           title: 'PRIORITY',
           text: prioritySize || 'No priority',
           color: getPriorityColor(prioritySize),
-          callback: function (t) {
-            return t.popup({
-              text: prioritySize
-            });
-          }
         };
       },
     };
