@@ -11,7 +11,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardEstimate = {
       dynamic(t) {
         return {
-          icon: './../images/tarefa.svg',
+          icon: './tarefa.png',
           title: 'SIZE',
           text: cardEstimate || '0',
           color: 'orange'
@@ -22,7 +22,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardSpent = {
       dynamic(t) {
         return {
-          icon: './tarefa.svg',
+          icon: './tarefa.png',
           title: 'SPENT',
           text: cardSpent || '0',
           color: 'green'
