@@ -58,7 +58,7 @@ const getEstimateBadgesDetails = (t, opts) =>
         return {
           title: 'PRIORITY',
           text: prioritySize || 'No priority',
-          color: 'orange',
+          color: getPriorityColor(prioritySize),
           callback: function (t) {
             return t.popup({
               text: prioritySize
@@ -137,6 +137,20 @@ const getEstimateBadgesDetails = (t, opts) =>
 //     badges.push(badgeEstimateUx);
 //     return badges;
 //   });
+
+function getPriorityColor(prioritySize) {
+  if (prioritySize === 'Highest')
+    return 'red';
+  if (prioritySize === 'Critical')
+    return 'orange';
+  if (prioritySize === 'Alarming')
+    return 'yellow';
+  if (prioritySize === 'Act Soon')
+    return 'green';
+  if (prioritySize === 'Lowest')
+    return 'blue';
+  return 'grey';
+}
 
 function isEmpty(val) {
   return (val === undefined || val == null || val.length <= 0) ? true : false;
