@@ -11,11 +11,11 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardEstimate = {
       dynamic(t) {
         return {
-          icon: './tarefa.png',
+          icon: 'https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/17071946331536922358-256.png',
           title: 'SIZE',
           text: cardEstimate || '0',
-          color: 'orange'
-        };
+            color: 'orange'
+          };
       },
     };
 
