@@ -11,7 +11,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardEstimate = {
       dynamic(t) {
         return {
-          icon: 'https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/17071946331536922358-256.png',
+          icon: 'https://cdn0.iconfinder.com/data/icons/revamp-2/24/interface_time_stop_watch_estimated-512.png',
           title: 'SIZE',
           text: cardEstimate || '0',
             color: 'orange'
@@ -22,7 +22,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardSpent = {
       dynamic(t) {
         return {
-          icon: './tarefa.png',
+          icon: 'https://cdn4.iconfinder.com/data/icons/vectory-bonus-1/40/time_check-512.png',
           title: 'SPENT',
           text: cardSpent || '0',
           color: 'green'
@@ -33,7 +33,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgeCardRemaining = {
       dynamic(t) {
         return {
-          icon: 'tarefa.svg',
+          icon: 'https://cdn3.iconfinder.com/data/icons/foodycons/100/hourglass-512.png',
           title: 'REMAINING',
           text: cardRemaining || '0',
           color: 'blue'
@@ -44,6 +44,7 @@ const getEstimateBadgesDetails = (t, opts) =>
     const badgePrioritySize = {
       dynamic(t) {
         return {
+          icon: 'https://cdn3.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-5/24/2085-512.png',
           title: 'PRIORITY',
           text: prioritySize || 'No priority',
           color: getPriorityColor(prioritySize),
