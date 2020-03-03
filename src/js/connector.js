@@ -1,58 +1,60 @@
 const { Promise } = window.TrelloPowerUp;
-const REFRESH_INTERVAL = 1800;
 
-const getEstimateBadgesDetails = (t, opts) =>
+const getEstimateBadgesDetails = t =>
   Promise.all([
     t.get('card', 'shared', 'cardEstimate'),
     t.get('card', 'shared', 'cardSpent'),
     t.get('card', 'shared', 'cardRemaining'),
-    t.get('card', 'shared', 'prioritySize')
+    t.get('card', 'shared', 'prioritySize'),
   ]).then(([cardEstimate, cardSpent, cardRemaining, prioritySize]) => {
     const badgeCardEstimate = {
-      dynamic(t) {
+      dynamic() {
         return {
-          icon: 'https://cdn0.iconfinder.com/data/icons/revamp-2/24/interface_time_stop_watch_estimated-512.png',
+          icon:
+            'https://cdn0.iconfinder.com/data/icons/revamp-2/24/interface_time_stop_watch_estimated-512.png',
           title: 'SIZE',
           text: cardEstimate || '0',
-            color: 'orange'
-          };
+          color: 'orange',
+        };
       },
     };
 
     const badgeCardSpent = {
-      dynamic(t) {
+      dynamic() {
         return {
           icon: 'https://cdn4.iconfinder.com/data/icons/vectory-bonus-1/40/time_check-512.png',
           title: 'SPENT',
           text: cardSpent || '0',
-          color: 'green'
+          color: 'green',
         };
       },
     };
 
     const badgeCardRemaining = {
-      dynamic(t) {
+      dynamic() {
         return {
           icon: 'https://cdn3.iconfinder.com/data/icons/foodycons/100/hourglass-512.png',
           title: 'REMAINING',
           text: cardRemaining || '0',
-          color: 'blue'
+          color: 'blue',
         };
       },
     };
 
     const badgePrioritySize = {
-      dynamic(t) {
+      dynamic() {
         return {
-          icon: 'https://cdn3.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-5/24/2085-512.png',
+          icon:
+            'https://cdn3.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-5/24/2085-512.png',
           title: 'PRIORITY',
           text: prioritySize || 'No priority',
+          // eslint-disable-next-line no-use-before-define
           color: getPriorityColor(prioritySize),
         };
       },
     };
 
-    let badges = [];
+    const badges = [];
 
     badges.push(badgeCardEstimate);
     badges.push(badgeCardSpent);
@@ -123,48 +125,41 @@ const getEstimateBadgesDetails = (t, opts) =>
 //   });
 
 function getPriorityColor(prioritySize) {
-  if (prioritySize === 'Highest')
-    return 'red';
-  if (prioritySize === 'Critical')
-    return 'orange';
-  if (prioritySize === 'Alarming')
-    return 'yellow';
-  if (prioritySize === 'Act Soon')
-    return 'green';
-  if (prioritySize === 'Lowest')
-    return 'blue';
+  if (prioritySize === 'Highest') return 'red';
+  if (prioritySize === 'Critical') return 'orange';
+  if (prioritySize === 'Alarming') return 'yellow';
+  if (prioritySize === 'Act Soon') return 'green';
+  if (prioritySize === 'Lowest') return 'blue';
   return 'grey';
 }
 
-function isEmpty(val) {
-  return (val === undefined || val == null || val.length <= 0) ? true : false;
-}
-
-window.TrelloPowerUp.initialize(
-  {
-    'card-badges': getEstimateBadgesDetails,
-    'card-detail-badges': getEstimateBadgesDetails,
-    'card-buttons': function (t, options) {
-      return [{
-        icon: 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
+window.TrelloPowerUp.initialize({
+  'card-badges': getEstimateBadgesDetails,
+  'card-detail-badges': getEstimateBadgesDetails,
+  'card-buttons': function() {
+    return [
+      {
+        icon:
+          'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
         text: 'Card Size',
-        callback: function (t) {
+        callback(t) {
           return t.popup({
-            title: "Card Size",
-            url: 'estimate.html'
+            title: 'Card Size',
+            url: 'estimate.html',
           });
-        }
+        },
       },
       {
-        icon: 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
+        icon:
+          'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
         text: 'Card Priority',
-        callback: function (t) {
+        callback(t) {
           return t.popup({
-            title: "Card Priority",
-            url: 'priority.html'
+            title: 'Card Priority',
+            url: 'priority.html',
           });
-        }
-      }];
-    },
-  }
-);
+        },
+      },
+    ];
+  },
+});
