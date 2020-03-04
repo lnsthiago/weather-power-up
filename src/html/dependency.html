@@ -8,8 +8,8 @@
 
 <body>
   <form id="dependency">
-    <div style="display: flex;">
-      <div style="align-self: flex-end; margin-left: 0.5em; margin-right: 0.5em;">
+    <div>
+      <div>
         <select name="size" id="dependencyKind">
           <option value="Blocks">Blocks</option>
           <option value="Is blocked by">Is blocked by</option>
@@ -18,7 +18,9 @@
           <option value="Is child to">Is child to</option>
           <option value="Is parent to">Is parent to</option>
         </select>
+        <input id="cardUrl" placeholder="Type to search or paste a link to a card..." autocomplete="off">
       </div>
+      <ul id="cardResults"></ul>
       <div><button type="submit" class="mod-primary">Save</button></div>
     </div>
   </form>
