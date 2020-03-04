@@ -140,7 +140,7 @@ window.TrelloPowerUp.initialize({
     return [
       {
         icon:
-          'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
+          'https://cdn0.iconfinder.com/data/icons/revamp-2/24/interface_time_stop_watch_estimated-512.png',
         text: 'Card Size',
         callback(t) {
           return t.popup({
@@ -151,12 +151,23 @@ window.TrelloPowerUp.initialize({
       },
       {
         icon:
-          'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
+          'https://cdn3.iconfinder.com/data/icons/pixel-perfect-at-24px-volume-5/24/2085-512.png',
         text: 'Card Priority',
         callback(t) {
           return t.popup({
             title: 'Card Priority',
             url: 'priority.html',
+          });
+        },
+      },
+      {
+        icon:
+          'https://cdn2.iconfinder.com/data/icons/universal-simple/288/Simple-55-512.png',
+        text: 'Dependencies',
+        callback(t) {
+          return t.popup({
+            title: 'Add a dependency',
+            url: 'dependency.html',
           });
         },
       },

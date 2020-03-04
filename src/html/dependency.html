@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  <script src="./../js/script.js" defer></script>
+</head>
+
+<body>
+  <form id="dependency">
+    <div style="display: flex;">
+      <div style="align-self: flex-end; margin-left: 0.5em; margin-right: 0.5em;">
+        <select name="size" id="dependencyKind">
+          <option value="Blocks">Blocks</option>
+          <option value="Is blocked by">Is blocked by</option>
+          <option value="Is related to">Is related to</option>
+          <option value="Is duplicate to">Is duplicate to</option>
+          <option value="Is child to">Is child to</option>
+          <option value="Is parent to">Is parent to</option>
+        </select>
+      </div>
+      <div><button type="submit" class="mod-primary">Save</button></div>
+    </div>
+  </form>
+  <script src="./../js/dependency.js"></script>
+</body>
+
+</html>
