@@ -141,7 +141,7 @@ var authenticationFailure = function() {
   console.log('Failed authentication');
 };
 
-window.Trello.authorize({
+window.TrelloPowerUp.authorize({
   type: 'popup',
   name: 'Getting Started Application',
   scope: {
