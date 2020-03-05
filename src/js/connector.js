@@ -64,66 +64,6 @@ const getEstimateBadgesDetails = t =>
     return badges;
   });
 
-// const getEstimateBadges = (t, opts) =>
-//   Promise.all([
-//     t.get('card', 'shared', 'remainingDev'),
-//     t.get('card', 'shared', 'remainingQa'),
-//     t.get('card', 'shared', 'remainingGp'),
-//     t.get('card', 'shared', 'remainingUx')
-//   ]).then(([remainingDev, remainingQa, remainingGp, remainingUx]) => {
-//     var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717';
-//     var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
-
-//     const badgeEstimateDev = {
-//       dynamic(t) {
-//         return {
-//           icon: isEmpty(remainingDev) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-//           text: remainingDev || 'Não estimado',
-//           color: isEmpty(remainingDev) ? 'red' : remainingDev === "0" ? 'green' : 'blue',
-//         };
-//       },
-//     };
-
-//     const badgeEstimateQa = {
-//       dynamic(t) {
-//         return {
-//           icon: isEmpty(remainingQa) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-//           text: remainingQa || 'Não estimado',
-//           color: isEmpty(remainingQa) ? 'red' : remainingQa === "0" ? 'green' : 'blue',
-//         };
-//       },
-//     };
-
-//     const badgeEstimateGp = {
-//       dynamic(t) {
-//         return {
-//           // title: 'GP',
-//           icon: isEmpty(remainingGp) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-//           text: remainingGp || 'Não estimado',
-//           color: isEmpty(remainingGp) ? 'red' : remainingGp === "0" ? 'green' : 'blue',
-//         };
-//       },
-//     };
-
-//     const badgeEstimateUx = {
-//       dynamic(t) {
-//         return {
-//           icon: isEmpty(remainingUx) ? WHITE_ROCKET_ICON : GREY_ROCKET_ICON,
-//           text: remainingUx || 'Não estimado',
-//           color: isEmpty(remainingUx) ? 'red' : remainingUx === "0" ? 'green' : 'blue',
-//         };
-//       },
-//     };
-
-//     let badges = [];
-
-//     badges.push(badgeEstimateDev);
-//     badges.push(badgeEstimateQa);
-//     badges.push(badgeEstimateGp);
-//     badges.push(badgeEstimateUx);
-//     return badges;
-//   });
-
 function getPriorityColor(prioritySize) {
   if (prioritySize === 'Highest') return 'red';
   if (prioritySize === 'Critical') return 'orange';
@@ -135,60 +75,34 @@ function getPriorityColor(prioritySize) {
 
 var GRAY_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-gray.svg';
 
-var cardButtonCallback = function(t){
+var cardButtonCallback = function (t) {
   return t.popup({
     title: 'Search Cards',
-    items: function(t, options) {
-      // We want to retrieve all of the cards we currently have and all of the fields
-      // on those cards that we will want to use for searching through.
+    items: function (t, options) {
       return t.cards('id', 'name', 'desc', 'shortLink', 'idShort')
-      .then(function(cards){
-        const searchText = options.search; // The text the user has input.
-        const matchedCards = cards.filter(function(card){
-          // We need to shrink our list of possible matches to those cards that contain what the
-          // user has input. We'll use a naive approach here and just see if the string entered
-          // is in any of the fields we care about.
-          const textToSearch = card.id + card.name + card.desc + card.shortLink + card.idShort;
-          return textToSearch.toLowerCase().includes(searchText.toLowerCase());
-        })
-        // Once we have all of the cards that match our search criteria, we need to put them into
-        // the array of objects that the t.popup method expects.
-        let items = matchedCards.map(function(card){
-          const cardUrl = `https://trello.com/c/${card.id}`
-          return {
-            text: card.name,
-            url: cardUrl,
-            callback: function(t){
-              // When the user selects one of the cards we've returned in the search, we want
-              // to attach that card via it's URL.
-              return t.attach({ url: cardUrl, name: card.name })
-              .then(function(){
-                // Once we've attached the card's URL to the current card, we can close
-                // our search popup.
-                return t.closePopup();
-              });
+        .then(function (cards) {
+          const searchText = options.search; // The text the user has input.
+          const matchedCards = cards.filter(function (card) {
+            const textToSearch = card.id + card.name + card.desc + card.shortLink + card.idShort;
+            return textToSearch.toLowerCase().includes(searchText.toLowerCase());
+          })
+          let items = matchedCards.map(function (card) {
+            const cardUrl = `https://trello.com/c/${card.id}`
+            return {
+              text: card.name,
+              url: cardUrl,
+              callback: function (t) {
+                return t.attach({ url: cardUrl, name: 'hahaha' })
+                  .then(function () {
+                    return t.closePopup();
+                  });
+              }
             }
-          }
+          })
+          return items;
         })
-        // Perhaps we want to have list options that are always visible, regardless of
-        // the search results. To do so, we can add the items to the array and give
-        // them the parameter alwaysVisible: true.
-        items.push({
-          text: 'First Default Card',
-          alwaysVisible: true,
-          callback: function(t) {
-            return t.closePopup();
-          }
-        }, {
-          text: 'Second Default Card',
-          alwaysVisible: true,
-          callback: function(t) {
-            return t.closePopup();
-          }
-        });
-        return items;
-      })
     },
+
     search: {
       placeholder: 'Card name, description, or ID',
       empty: 'Huh, nothing there 🤔',
