@@ -133,29 +133,82 @@ function getPriorityColor(prioritySize) {
   return 'grey';
 }
 
-var authenticationSuccess = function() {
-  console.log('Successful authentication');
-};
+var GRAY_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-gray.svg';
 
-var authenticationFailure = function() {
-  console.log('Failed authentication');
+var cardButtonCallback = function(t){
+  return t.popup({
+    title: 'Search Cards',
+    items: function(t, options) {
+      // We want to retrieve all of the cards we currently have and all of the fields
+      // on those cards that we will want to use for searching through.
+      return t.cards('id', 'name', 'desc', 'shortLink', 'idShort')
+      .then(function(cards){
+        const searchText = options.search; // The text the user has input.
+        const matchedCards = cards.filter(function(card){
+          // We need to shrink our list of possible matches to those cards that contain what the
+          // user has input. We'll use a naive approach here and just see if the string entered
+          // is in any of the fields we care about.
+          const textToSearch = card.id + card.name + card.desc + card.shortLink + card.idShort;
+          return textToSearch.toLowerCase().includes(searchText.toLowerCase());
+        })
+        // Once we have all of the cards that match our search criteria, we need to put them into
+        // the array of objects that the t.popup method expects.
+        let items = matchedCards.map(function(card){
+          const cardUrl = `https://trello.com/c/${card.id}`
+          return {
+            text: card.name,
+            url: cardUrl,
+            callback: function(t){
+              // When the user selects one of the cards we've returned in the search, we want
+              // to attach that card via it's URL.
+              return t.attach({ url: cardUrl, name: card.name })
+              .then(function(){
+                // Once we've attached the card's URL to the current card, we can close
+                // our search popup.
+                return t.closePopup();
+              });
+            }
+          }
+        })
+        // Perhaps we want to have list options that are always visible, regardless of
+        // the search results. To do so, we can add the items to the array and give
+        // them the parameter alwaysVisible: true.
+        items.push({
+          text: 'First Default Card',
+          alwaysVisible: true,
+          callback: function(t) {
+            return t.closePopup();
+          }
+        }, {
+          text: 'Second Default Card',
+          alwaysVisible: true,
+          callback: function(t) {
+            return t.closePopup();
+          }
+        });
+        return items;
+      })
+    },
+    search: {
+      placeholder: 'Card name, description, or ID',
+      empty: 'Huh, nothing there 🤔',
+      searching: 'Searching your cards...'
+    }
+  });
 };
-
-window.TrelloPowerUp.authorize({
-  type: 'popup',
-  name: 'Getting Started Application',
-  scope: {
-    read: 'true',
-    write: 'true' },
-  expiration: 'never',
-  success: authenticationSuccess,
-  error: authenticationFailure
-});
 
 window.TrelloPowerUp.initialize({
+  'authorization-status': (t) =>
+    new TrelloPowerUp.Promise((resolve) => resolve({ authorized: false })),
+  'show-authorization': (t) =>
+    t.popup({
+      title: 'My Auth Popup',
+      url: 'authorize.html',
+      height: 140,
+    }),
   'card-badges': getEstimateBadgesDetails,
   'card-detail-badges': getEstimateBadgesDetails,
-  'card-buttons': function() {
+  'card-buttons': function () {
     return [
       {
         icon:
@@ -190,6 +243,11 @@ window.TrelloPowerUp.initialize({
           });
         },
       },
+      {
+        icon: GRAY_ICON,
+        text: 'Search Your Cards',
+        callback: cardButtonCallback
+      }
     ];
-  },
+  }
 });

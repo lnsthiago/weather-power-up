@@ -7,6 +7,19 @@
 
 <body>
   <script src="https://p.trellocdn.com/power-up.min.js" crossorigin="anonymous"></script>
+  <script>
+    var t = window.TrelloPowerUp.iframe({
+      appKey: 'your-app-key',
+      appName: 'My Great Power-Up'
+    });
+    t.render(function() {
+      t.getRestApi()
+        .isAuthorized()
+        .then(function(isAuthorized) {
+          alert('Success!');
+        });
+    });
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://api.trello.com/1/client.js?key=ee63a54be66be114d41f6f87a703ca93"></script>
