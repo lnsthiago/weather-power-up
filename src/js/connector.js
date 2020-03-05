@@ -92,10 +92,23 @@ var cardButtonCallback = function (t) {
               text: card.name,
               url: cardUrl,
               callback: function (t) {
-                return t.attach({ url: cardUrl, name: 'hahaha' })
-                  .then(function () {
-                    return t.closePopup();
-                  });
+                return t.popup({
+                  title: 'Tipo da dependecia',
+                  items: [{
+                    text: 'Choose Time',
+                    // callback: function (t, opts) { ... }
+                  }, {
+                    text: 'In 1 hour',
+                    // callback: function (t, opts) { ... }
+                  }, {
+                    text: 'In 2 hours',
+                    // callback: function (t, opts) { ... }
+                  }]
+                })
+                // return t.attach({ url: cardUrl, name: card.name })
+                //   .then(function () {
+                //     return t.closePopup();
+                //   });
               }
             }
           })
